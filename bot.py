@@ -10,8 +10,6 @@ var = raw_input("Please enter language codes (en es pt): ")
 parser = HTMLParser()
 languages = var.split() 
 agent = {'User-Agent':"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30)"}
-xmlFile = ET.parse('strings/strings.xml').getroot()
-root = ET.Element("resources")
 def indent(elem, level=0):
   i = "\n" + level*"    "
   if len(elem):
@@ -38,6 +36,8 @@ def translate(translate_string, to_langage="auto"):
     return parser.unescape(result).encode('utf-8')
 
 for code in languages:
+    xmlFile = ET.parse('strings/strings.xml').getroot()
+    root = ET.Element("resources")
     print "\n"
     print "Translating to %s" % code
     for strings in xmlFile.findall("string"):
